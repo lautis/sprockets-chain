@@ -17,6 +17,7 @@ describe("SprocketsChain", function() {
     this.res3  = new SprocketsChain.Resource( "bad_eoln.js", sc._trail );
     this.res4  = new SprocketsChain.Resource( "multi.js", sc._trail );
     this.res5  = new SprocketsChain.Resource( "eleven/one.js", sc._trail );
+    this.res6  = new SprocketsChain.Resource( "directory.js", sc._trail );
   });
 
   describe("SprocketsChain.Resource", function() {
@@ -207,6 +208,13 @@ describe("SprocketsChain", function() {
         expect( chain[0] ).toEqual(full_path("eleven/one.js"));
         expect( chain[1] ).toEqual(full_path("eleven/two.js"));
       });
+
+      it("includes files in curretn directory before subdirectories", function() {
+        var chain = this.res6.depChain();
+        expect( chain.length ).toEqual(3);
+        expect( chain[0] ).toEqual(full_path("twelve/directory.js"));
+        expect( chain[1] ).toEqual(full_path("twelve/directory/content.js"));
+      })
     });
   });
 

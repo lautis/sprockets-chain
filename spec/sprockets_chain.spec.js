@@ -26,7 +26,7 @@ describe("SprocketsChain", function() {
     it("creates new resource and proxies to its depChain method", function() {
       var spy = this.spy();
       this.stub( this.sc, "resource", function() {
-        return { 
+        return {
           depTree: function() {
             return { depChain: spy };
           }
